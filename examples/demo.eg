@@ -1,0 +1,13 @@
+
+Prove[imp[and[integer[n], n>=0], 
+      sum[2^k / (1 + x^(2^k)), {k, 0, n}] == 1/(x-1) + 2^(n+1)/(1-x^(2^(n+1)))]];
+
+Prove[imp[x^2 > 1, limit[sum[1/(k^2 + (2 x^2 + 1) k + x^2 (x^2 + 1)), {k, 1, n}], {n, infinity}] <1/2]];
+
+Prove[imp[and[integer[n], n>=0, a>= -1], (1+a)^n >= 1 + a n]];
+
+<<sp.given; 
+Prove[some[{x1, x2, x3}, and[sp[x1, x2, x3] == z1 + z2 i, unit[x1,x2,x3]]]];
+
+<<nondiff.given;
+ProveAndSave[Abs[R[m]]>=2/3 a^m b^m];

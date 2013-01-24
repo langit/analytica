@@ -1,0 +1,59 @@
+(* Copyright E.M.Clarke and Xudong Zhao, Jan 22, 1991 *)
+
+(* ANALYTICA--A THEOREM PROVING SYSTEM FOR MATHEMATICA *)
+
+$Path = Join[$Path, {"/afs/user/xzhao/analytica/analytica", "/afs/user/xzhao/analytica/examples"}];
+
+<<user_interface.M;
+
+<<system_interface.M;
+
+(* Proof context. *)
+
+<<environment.M;
+
+(* Quantification. *)
+
+<<quantify.M;
+
+(* Simplify the sequent to be proved. *)
+
+<<simplify.M;
+
+(* Rewrite the sequent to be proved. *)
+
+<<rewrite.M;
+
+(* Handle equalities. *)
+
+<<equation.M;
+
+(* Handle inequalities. *)
+
+<<inequality.M;
+
+(* Rules for types. *)
+
+<<types.M;
+
+(* Rules for mathematical functions. *)
+
+<<functions.M;
+
+(* Load the main routine for prover. *)
+
+<<prover.M;
+
+(* Add lemmas and rewrite rules about analysis. *)
+
+<<lemmas.m;
+
+
+(* The top most context is "global". *)
+
+StartSection[Global];
+
+
+(* Extend the recursion limit. *)
+
+$RecursionLimit = 512;

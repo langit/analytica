@@ -1,0 +1,9 @@
+Prove[imp[and[a!=0, x!=y, a x^2 + b x + c == 0,
+				a y^2 + b y + c == 0],
+			and[x + y == - b/a, x y == c/a]]];
+
+Prove[imp[0 < a < b, b^3 - a^3 > (b - a)^3]];
+
+Prove[imp[and[r > 0, a < b], a < (a + b r) / (1 + r) < b]];
+
+EndDocument;

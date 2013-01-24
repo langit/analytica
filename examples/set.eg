@@ -1,0 +1,10 @@
+<<sets.m;
+Prove[eqv[subset[a,b],seteq[a, intersect[a,b]]]];
+
+symmetricDiff[a_, b_] := setof[y, and[or[in[y,a], in[y,b]], not[and[in[y,a],in[y,b]]]]];
+
+Prove[seteq[symmetricDiff[a,b], union[setdiff[a,b], setdiff[b,a]]]];
+
+Prove[seteq[symmetricDiff[a,b], setdiff[union[a, b], intersect[a,b]]]];
+
+Prove[imp[subset[b,a], seteq[b, setdiff[a, setdiff[a,b]]]]];

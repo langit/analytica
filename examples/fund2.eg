@@ -1,0 +1,28 @@
+g[z_] := c[0](1 + b[m] z^m + sum[b[k] z^k, {k, m+1, n}]);
+
+z = r / (-b[m])^(1/m);
+
+Given[c[0] != 0];
+
+Given[b[m] != 0];
+
+Given[r < 1];
+
+Given[r>0];
+
+Given[Abs[z] < 1];
+
+Given[Abs[b[m]]/Abs[z] > sum[Abs[b[k]], {k, m+1, n}]];
+
+Given[m>0];
+
+PrintGiven[];
+
+NewPage[];
+
+ProveAndSave[Abs[g[z]] <= 
+	Abs[c[0]] (1 + b[m] z^m + Abs[z^(m+1)]sum[Abs[b[k]], {k, m+1, n}])];
+
+Prove[Abs[g[z]] < Abs[c[0]]];
+
+EndDocument;

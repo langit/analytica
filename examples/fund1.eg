@@ -1,0 +1,35 @@
+integer[k] = True;
+integer[n] = True;
+
+f[x_] := sum[x^k a[k], {k, 0, n}];
+
+M = Abs[a[0]];
+
+Given[n>=1];
+
+Given[a[n]>0];
+
+Given[Abs[z]>r, Abs[z]>0];
+
+Abbreviate[M, M];
+
+r1 = sum[Abs[a[k]/a[n]], {k, 0, n-1}];
+
+Given[r>= 1, r>= 2 r1, r^n >= 2 M/Abs[a[n]]];
+
+Format[a[n_], TeXForm] := StringJoin["a\_", ToString[TeXForm[n]]];
+
+PrintGiven[];
+
+Newpage[];
+
+ProveAndSave[Abs[f[z]] >= Abs[a[n]z^n]-Abs[sum[a[k] z^k, {k, 0, n-1}]]];
+
+ProveAndSave[Abs[a[n]z^n] - Abs[sum[a[k]z^k, {k, 0, n-1}]] >= 
+	     Abs[a[n] z^n] (1-sum[Abs[a[k]/(a[n]z)], {k, 0, n-1}])];
+
+ProveAndSave[Abs[a[n]z^n] (1-sum[Abs[a[k]/(a[n] z)], {k, 0, n-1}]) >= M];
+
+Prove[Abs[f[z]] >= M];
+
+EndDocument;

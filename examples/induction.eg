@@ -1,0 +1,11 @@
+integer[n] = True;
+
+Given[ n>= 0];
+
+Prove[imp[a>= -1, (1 + a) ^ n >= 1 + a n]];
+
+Prove[imp[n>=5, n^2 < 2^n]];
+
+Prove[imp[n>=4, n! > 2^n]];
+
+EndDocument;

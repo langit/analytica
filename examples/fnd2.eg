@@ -1,0 +1,13 @@
+g[z_] := 1 + b[m] z^m + sum[b[k] z^k, {k, m+1, n}];
+
+z = r / (-b[m])^(1/m);
+
+Given[r < 1];
+
+Given[r>0];
+
+Given[Abs[z] <= 1];
+
+Given[Abs[z] <= Abs[b[m]/sum[b[k], {k, m+1, n}]]];
+
+Prove[Abs[g[z]] <= 1 + b[m] z^m + Abs[z^(k+1)]sum[Abs[b[k]], {k, m+1, n}]];

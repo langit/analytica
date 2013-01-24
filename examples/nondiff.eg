@@ -1,0 +1,91 @@
+Format[c1, TeXForm] := "c_1";
+
+Format[c2, TeXForm] := "c_2";
+
+Format[x0, TeXForm] := "x_0";
+
+Format[f1, TeXForm] := "f_0";
+
+f[x_] := sum[b^n Cos[a^n Pi x], {n, 0, infinity}];
+
+
+
+IsConstant[a, x] := True;
+
+IsConstant[b, x] := True;
+
+IsConstant[n, x] := True;
+
+IsConstant[m, x] := True;
+
+IsConstant[Pi, x] := True;
+
+
+integer[a] = True;
+integer[n] := True;
+integer[m] := True;
+Odd[a] := True;
+
+Given[a b > 1];
+Given[b<1];
+Given[n>0];
+Given[m>0];
+Given[a>1];
+Given[b>0];
+Given[Pi>0];
+
+Given[a b > 1 + 3/2 Pi];
+
+
+AddDefinition[S[m_] == sum[b^n (Cos[a^n Pi (x+h)] - Cos[a^n Pi x]) / h, {n, 0, m-1}]];
+
+AddDefinition[R[m_] ==  (-1)^(round[a^m x] + 1) sum[b^n (1 + Cos[a^(n-m) Pi xi[m]]) / h, {n, m, infinity}]];
+
+AddDefinition[diff[h0_, f0_, x_] == (f0[x+h0] - f0[x]) / h0];
+
+
+xi[m_] := a^m x - round[a^m x];
+h = (1 - xi[m]) / a^m;
+
+Abbreviate[h, h];
+
+Abbreviate[xi[m], xi[m]];
+
+Abbreviate[f_-xi[m], f-xi[m]];
+
+Abbreviate[f[x_], f[x]];
+
+Abbreviate[round[a^m x], alpha];
+
+Format[h0] := "h";
+
+Format[h0, TeXForm] := "h";
+
+Format[f0] := "f";
+
+Format[f0, TeXForm] := "f";
+
+PrintGiven[];
+
+PrintDefinition[];
+
+PrintAbbreviation[];
+
+Newpage[];
+
+Prove[Continuous[f[x], {x, x0}]];
+
+ProveAndSave[diff[h,f,x]==R[m]+S[m]];
+
+ProveAndSave[Abs[R[m]]>=2/3 a^m b^m];
+
+ProveAndSave[Abs[S[m]] < Pi a^m b^m / (a b - 1)];
+
+Prove[all[epsilon, imp[epsilon>0, limit[Abs[h], {m, infinity}]<epsilon]]];
+
+Prove[all[M, limit[Abs[diff[h,f,x]], {m,infinity}]>M]];
+
+EndDocument;
+
+!ps
+

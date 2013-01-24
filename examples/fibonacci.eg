@@ -1,0 +1,23 @@
+
+F[0] := 0;
+F[1] := 1;
+F[n_. + k_Integer] := F[n + k - 1] + F[n + k - 2] /; k >=2;
+
+integer[n] = True;
+Given[n>= 0];
+
+ProveByInduction[{n, 0, 2}, F[n] == ((1+Sqrt[5])^n - (1-Sqrt[5])^n) / (2^n Sqrt[5])];
+
+Prove[sum[F[k], {k, 1, n}] == F[n + 2] -1];
+
+Prove[sum[F[k]^2, {k, 1, n}] == F[n] F[n + 1]];
+
+Prove[sum[ k F[k], {k, 1, n}] == (n + 1) F[n + 2] - F[n + 4] + 2];
+     
+     
+Prove[F[n + 3]^2 - 4 F[n + 2] F[n + 1] == F[n]^2];
+     
+
+Prove[F[n + 3] F[n + 1] - F[n + 4] F[n]  == 2 (-1)^n];
+
+EndDocument;

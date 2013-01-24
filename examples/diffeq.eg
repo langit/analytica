@@ -1,0 +1,26 @@
+constant[a] := True;
+constant[b] := True;
+constant[M] := True;
+
+y[n_, x_] := y0 + Integrate[f[t, y[n-1, t]], {t, x0, x}] /;  n > 0;
+y[0, x_] := y0;
+y[n_+1, x_] := y0 + Integrate[f[t, y[n-1, t]], {t, x0, x}];
+
+bounded[f] = True;
+M = Bound[f];
+
+h = Min[a, b/M];
+
+Given[Abs[x - x0] <= h];
+
+Prove[a >= Min[a, b]];
+
+Prove[h M <= b];
+
+Prove[M Abs[x - x0] <= b];
+
+Prove[M Abs[Integrate[1, {t, x0, x}]] <= b];
+
+Prove[Abs[y[1,x] - y0] <= b];
+
+Prove[Abs[y[k+1, x] - y0] <= b];

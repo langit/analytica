@@ -1,0 +1,30 @@
+The theorem prover ANALYTICA is an attempt to prove nontrivial
+theorems in analysis. It is build on top of Mathematica. To run it,
+type "math" to start mathematica. Then load file "index.all" in order
+to load in the prover. The files are grouped in a hierarchical way,
+with "index.all" being the root. All file ends with ".eg" are the
+examples files. Subdirectory "examples" contains the following files:
+
+simple.eg     --   some simple theorems in elemently algebra.
+induction     --   Two theorems proved by induction.
+summation.eg  --   Theorems about summation and pruducts.
+fibonacci.eg  --   Theorems about Fibonacci numbers.
+sp.eg         --   Properties of the Steorographic projection.
+nondiff.eg    --   An everywhere continuous but nowhere differentiable function.
+
+
+Example of running analytica:
+
+
+math
+<<index.all
+<<examples/simple.eg
+
+
+
+
+OR
+
+math
+<<index.all
+Prove[imp[0 < a < b, b^3 - a^3 > (b - a)^3]];

@@ -1,0 +1,19 @@
+integer[n] = True;
+
+Given[ n>= 0];
+
+Prove[sum[1/(k (k+1)), {k, 1, n}] == n / (n + 1)];
+
+Prove[imp[n>=2, sum[k(k+1)(k+2), {k, 1, n}] == n(n+1)(n+2)(n+3)/4]];
+
+Prove[imp[n>=1, sum[k/2^k, {k, 1, n}] == 2 - (2+n)/2^n]];
+
+Prove[sum[2^k / (1 + x^(2^k)), {k, 0, n}] == 1/(x-1) + 2^(n+1)/(1-x^(2^(n+1)))];
+
+Prove[imp[n>=2, product[(k^2 - 1) / k^2, {k, 2, n}] == (1 + n) / (2 n)]];
+
+Prove[imp[n>=2, product[k^2 / ((k-1)(k+1)), {k, 2, n}] == (2 n) / (1 + n)]];
+
+Prove[imp[x^2 > 1, limit[sum[1/(k^2 + (2 x^2 + 1) k + x^2 (x^2 + 1)), {k, 1, n}], {n, infinity}] <1/2]];
+
+EndDocument;

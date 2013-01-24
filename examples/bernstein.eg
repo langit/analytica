@@ -1,0 +1,81 @@
+(* a given n which is large enough *)
+
+n = m^(-4);
+
+(* the bound of function f over interval [0, 1] *)
+
+M=Bound[f];
+
+(* the order of bernstein polynomial and the index of summation are integers *)
+
+integer[n] = True;
+
+integer[k] = True;
+
+
+
+sum1[f_] := sum[f,  {k,0,n,Abs[k/n-x]<n^(-1/4)}];
+
+sum2[f_] := sum[f,  {k,0,n,n^(-1/4)<=Abs[k/n-x]}];
+
+
+Abbreviate[M, M];
+
+Abbreviate[n, n];
+
+Abbreviate[f_/n, f/n];
+
+Abbreviate[n^(-2), 1/n^2];
+
+
+(* the bernstein polynomial for "f" *)
+
+AddDefinition[B[n_,x_] == sum[f[k/n] Binomial[n, k] x^k (1-x)^(n-k), {k, 0, n}]];
+
+
+AddDefinition[near[x_, n_] == 
+	sum1[Abs[f[x]-f[k/n]] Binomial[n,k] x^k (1-x)^(n-k)]];
+
+AddDefinition[far[x_, n_] == 
+	sum2[Abs[f[x]-f[k/n]] Binomial[n,k] x^k (1-x)^(n-k)]];
+
+
+
+ContinuousFunction[f] := True;
+
+Domain[f] := ClosedInterval[0, 1];
+
+Given[m<= delta[f][epsilon/2]];
+
+Given[m>0, epsilon>0, x>0, x<1];
+
+AddDefinition[far1[x_, n_] == 
+	2 M Sqrt[n] sum2[(x-k/n)^2 Binomial[n,k] x^k (1-x)^(n-k)]];
+
+Given[m^2 <= epsilon/M];
+
+
+PrintGiven[];
+
+PrintDefinition[];
+
+PrintAbbreviation[];
+
+Newpage[];
+
+ProveAndSave[near[x, n]<=epsilon/2];
+
+ProveAndSave[far1[x, n]<=epsilon/2];
+
+ProveAndSave[far[x, n]<=far1[x, n]];
+
+ProveAndSave[Abs[f[x]-B[n,x]]<=far[x, n]+near[x, n]];
+
+Prove[Abs[f[x]-B[n,x]] <= epsilon];
+
+EndDocument;
+
+!ps
+
+
+

@@ -1,0 +1,25 @@
+b[n_.+n0_Integer?Positive, k_] := b[n+n0-1, k] + b[n+n0-1, k-1];
+
+b[n_, k_?Negative] := 0;
+
+b[n_, 0] := 1;
+
+b[n_, n_ + _Integer?Positive] := 0;
+
+b[n_Integer, k_Integer] := Binomial[n, k];
+
+b[0, 1+_] := True;
+
+ProveByInduction[n, sum[b[r+k, k], {k, 0, n}] == b[r+n+1, n]];
+
+ProveByInduction[n, sum[b[k, m], {k, 0, n}] == b[n+1, m+1]];
+
+POWER[x_, p_ + n_Integer] := POWER[x, p] x^n;
+POWER[x_, n_Integer] := x^n;
+b[n_ + 1, m_] := b[n, m] + b[n, m-1];
+b[n_, n_+1] := 0;
+b[n_, -1] := 0;
+b[n_, n_] := 1;
+ProveByInduction[n, 
+	POWER[(x + y), n] == sum[x^k y^(n-k) b[n, k], {k, 0, n}]];
+EndDocument

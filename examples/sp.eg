@@ -1,0 +1,45 @@
+Format[x1, TeXForm] := "x_1";
+
+Format[x2, TeXForm] := "x_2";
+
+Format[x3, TeXForm] := "x_3";
+
+Format[y1, TeXForm] := "y_1";
+
+Format[y2, TeXForm] := "y_2";
+
+Format[y3, TeXForm] := "y_3";
+
+Format[z1, TeXForm] := "z_1";
+
+Format[z2, TeXForm] := "z_2";
+
+Format[Ipart, TeXForm] := "I";
+
+Format[Rpart, TeXForm] := "R";
+
+sp[x1_, x2_, x3_] := over[(x1 + i x2), (1-x3)];
+
+unit[x1_, x2_, x3_] := (x1^2 + x2^2 + x3^2 == 1);
+
+Given[x3-1!=0, y3-1!=0];
+
+real[x1]=real[x2]=real[x3] =real[y1] = real[y2]= real[y3] = True;
+
+Prove[imp[and[unit[x1, x2, x3], unit[y1, y2, y3], sp[x1, x2, x3] == sp[y1, y2, y3]], and[x3 == y3, x1==y1, x2==y2]]];
+
+real[Var[_]] = real[Const[__]] = True;
+
+real[z1] = real[z2] = True;
+
+Prove[some[{x1, x2, x3}, and[sp[x1, x2, x3] == z1 + z2 i, unit[x1,x2,x3]]]];
+
+colinear[{x1_, x2_, x3_}, {y1_, y2_, y3_}, {z1_, z2_, z3_}] := 
+	and[Det[{{x1, x2, 1}, {y1, y2, 1}, {z1, z2, 1}}] == 0,
+	    Det[{{x1, x3, 1}, {y1, y3, 1}, {z1, z3, 1}}] == 0,
+	    Det[{{x2, x3, 1}, {y2, y3, 1}, {z2, z3, 1}}] == 0];
+
+Prove[imp[z == sp[x1, x2, x3],
+	colinear[{Rpart[z], Ipart[z], 0}, {x1, x2, x3}, {0,0,1}]]];
+              
+EndDocument;
