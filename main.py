@@ -64,8 +64,8 @@ def loadnrun(total_input, definitions, script=False):
         stripped_input = stripped_input[2:].strip()
         if '\n' not in stripped_input and \
                not stripped_input.startswith('"'):
-            #try:
-            execute(stripped_input, definitions, script) 
+            with open(stripped_input) as infile:
+                execute(infile, definitions, script) 
             #except:
             #   print "Error:", sys.exc_info()[0]
             #   print "Problem execute:", stripped_input
@@ -73,10 +73,6 @@ def loadnrun(total_input, definitions, script=False):
 
 def execute(file, definitions, script):
         '''load a .m script: <<file.m;'''
-        if type(file) is str:
-            with open(file) as fobj:
-              return execute(fobj, definitions, script)
-
         total_input = ""
         for line in file:
             if script and line.startswith('#!'):
