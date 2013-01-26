@@ -21,11 +21,11 @@ complex/: (over[complex[a_, b_], c_]) :=
 complex/: (complex[a_, b_] complex[c_, d_]) :=  
 	complex[a c - b d, a d + b c];
 
-complex/: (complex[a_, b_] == complex[c_, d_]) :=  and[a == c, b == d];
+complex/: (complex[a_, b_] == complex[c_, d_]) :=  And[a == c, b == d];
 
-complex/: (complex[a_, b_] == c_) :=  and[a == c, b == 0] /; real[c];
+complex/: (complex[a_, b_] == c_) :=  And[a == c, b == 0] /; real[c];
 
-complex/: (c_ == complex[a_, b_]) :=  and[a == c, b == 0] /; real[c];
+complex/: (c_ == complex[a_, b_]) :=  And[a == c, b == 0] /; real[c];
 
 complex[x_, 0] := x;
 

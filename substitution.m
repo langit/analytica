@@ -28,16 +28,16 @@ SubstEquation[s_] := Block[{s0, s1}, (
 (* Substitute using an equation in the hypothesis. The equation should
 be kept in the hypothesis after substitution. *)
 
-Substitute[seq[and[h1___, a_  ==  b_, h2___], c_]] := 
-	seq[and[h1, h2] /. a -> b, c /. a -> b] /;
+Substitute[seq[And[h1___, a_  ==  b_, h2___], c_]] := 
+	seq[And[h1, h2] /. a -> b, c /. a -> b] /;
 	Head[a]==Var || Head[a]==Const || Head[a]==Symbol;
 
 Substitute[seq[a_  ==  b_, c_]] := 
 	seq[True, c /. a -> b] /;
 	Head[a]==Var || Head[a]==Const || Head[a]==Symbol;
 
-Substitute[seq[and[h1___, a_^n_  ==  b_, h2___], c_]] := 
-	seq[and[h1, h2], c] /;
+Substitute[seq[And[h1___, a_^n_  ==  b_, h2___], c_]] := 
+	seq[And[h1, h2], c] /;
 	(Head[a]==Var || Head[a]==Const || Head[a]==Symbol) && 
 	FreeQ[{h1, h2, c}, a];
 
@@ -46,8 +46,8 @@ Substitute[seq[a_^n_  ==  b_, c_]] :=
 	(Head[a]==Var || Head[a]==Const || Head[a]==Symbol) &&
 	FreeQ[c, a];
 
-Substitute[seq[and[h1___, a_  ==  b_, h2___], c_]] := 
-	seq[and[and[h1, h2] /. a -> b, a == b], c /. a -> b] /;
+Substitute[seq[And[h1___, a_  ==  b_, h2___], c_]] := 
+	seq[And[And[h1, h2] /. a -> b, a == b], c /. a -> b] /;
 	!FreeQ[{h1, h2, c}, a];
 
 Substitute[seq[a_  ==  b_, c_]] := 

@@ -8,7 +8,7 @@ EquationRules = {
 
 (* Standard form for equalities. *)
 
-Equal[a_, b_, c__] :> and[a==b, Equal[b, c]],
+Equal[a_, b_, c__] :> And[a==b, Equal[b, c]],
 
 (a_?NumberQ == b_) :> (b==a),
 
@@ -16,7 +16,7 @@ Equal[a_, b_, c__] :> and[a==b, Equal[b, c]],
 
 (* Integral domain property. *)
 
-(a_ b_ == 0) :> or[a == 0, b == 0],
+(a_ b_ == 0) :> Or[a == 0, b == 0],
 
 
 (a_ + b_ == c_) :> a + b - c == 0 /; c =!= 0,
@@ -35,10 +35,10 @@ equation. *)
 
 (* Remove a common factor from both sides of an equation. *)
 
-(x_. a_  ==  y_. a_) :> or[a == 0, x == y], 
+(x_. a_  ==  y_. a_) :> Or[a == 0, x == y], 
 
 (x_. a_^n1_. == y_. a_^n2_.) :> 
-	or[a^n1 == 0, x == y a^(n2-n1)],
+	Or[a^n1 == 0, x == y a^(n2-n1)],
 
 (x_. a_^(n_Integer?Negative e_.) == y_) :>
 	(x == y a^(-n e)),
@@ -46,9 +46,9 @@ equation. *)
 
 (* Simplify equalities involving a power *)
 
-(a_ ^ b_ == 1) :> (b == 0) /; WeakSimplify[or[1<a, a<-1, -1<a<1]],
+(a_ ^ b_ == 1) :> (b == 0) /; WeakSimplify[Or[1<a, a<-1, -1<a<1]],
 
-(a_^n_ == 0) :> and[a==0, n>0]
+(a_^n_ == 0) :> And[a==0, n>0]
 
 };
 

@@ -9,31 +9,31 @@ InequalityRules = {
 
 (* Standard form for inequalities. *)
 
-(a_ != b_) :> not[a == b],
+(a_ != b_) :> Not[a == b],
 
 (a_ > b_) :>  (b < a), 
 
 (a_ >= b_) :> (b <= a),
 
-Less[a_, b_, c__] :> and[a<b, Less[b, c]],
+Less[a_, b_, c__] :> And[a<b, Less[b, c]],
 
-Greater[a_, b_, c__] :> and[a>b, Greater[b, c]],
+Greater[a_, b_, c__] :> And[a>b, Greater[b, c]],
 
-LessEqual[a_, b_, c__] :> and[a<=b, LessEqual[b, c]],
+LessEqual[a_, b_, c__] :> And[a<=b, LessEqual[b, c]],
 
-GreaterEqual[a_, b_, c__] :> and[a>=b, GreaterEqual[b, c]],
+GreaterEqual[a_, b_, c__] :> And[a>=b, GreaterEqual[b, c]],
 
 
 
 (* Rules involving relations between 0 and a product. *)
 
-(x_ a_ < 0) :> or[and[0 < x, a < 0], and[0 < a, x < 0]], 
+(x_ a_ < 0) :> Or[And[0 < x, a < 0], And[0 < a, x < 0]], 
 
-(x_ a_ <=  0) :> or[and[0 <= x, a <= 0], and[0 <= a, x <= 0]],
+(x_ a_ <=  0) :> Or[And[0 <= x, a <= 0], And[0 <= a, x <= 0]],
 
-(0 < x_ a_) :> or[and[0 < x, 0 < a], and[a < 0, x < 0]],
+(0 < x_ a_) :> Or[And[0 < x, 0 < a], And[a < 0, x < 0]],
 
-(0 <= x_ a_) :> or[and[0 <= x, 0 <= a], and[a <= 0, x <= 0]],
+(0 <= x_ a_) :> Or[And[0 <= x, 0 <= a], And[a <= 0, x <= 0]],
 
 
 
@@ -63,13 +63,13 @@ GreaterEqual[a_, b_, c__] :> and[a>=b, GreaterEqual[b, c]],
 
 (0 <= a_^n_?Negative) :> (0 < a ^ (-n)),
 
-(0 <= a_^n_) :> or[0<=a, Even[n]]/;integer[n],
+(0 <= a_^n_) :> Or[0<=a, Even[n]]/;integer[n],
 
-(a_^n_ <= 0) :> or[a==0, and[a<0, not[Even[n]]]]/;integer[n],
+(a_^n_ <= 0) :> Or[a==0, And[a<0, Not[Even[n]]]]/;integer[n],
 
-(0 < a_^n_) :> or[0<a, and[a<0, Even[n]]]/;integer[n],
+(0 < a_^n_) :> Or[0<a, And[a<0, Even[n]]]/;integer[n],
 
-(a_^n_ < 0) :> and[a<0, not[Even[n]]]/;integer[n],
+(a_^n_ < 0) :> And[a<0, Not[Even[n]]]/;integer[n],
 
 
 
@@ -78,22 +78,22 @@ conditions are used to insure that the rules derived from the
 subformula are not complicated and can be applied to the other parts
 of the formula. *)
 
-or[a___, b_ < c_, d___] :> or[b<c, (or[a, d] /. RulesFrom[c<=b])] /;
+Or[a___, b_ < c_, d___] :> Or[b<c, (Or[a, d] /. RulesFrom[c<=b])] /;
 	!TooComplicated[b<c] && appears[{a, d}, b-c],
 
-or[a___, b_ <= c_, d___] :> or[b<=c, (or[a, d] /. RulesFrom[c<b])] /;
+Or[a___, b_ <= c_, d___] :> Or[b<=c, (Or[a, d] /. RulesFrom[c<b])] /;
 	!TooComplicated[b<=c] && appears[{a, d}, b-c],
 
-or[a___, b_ == c_, d___] :> or[b==c, (or[a, d] /. RulesFrom[not[c==b]])] /;
+Or[a___, b_ == c_, d___] :> Or[b==c, (Or[a, d] /. RulesFrom[Not[c==b]])] /;
 	!TooComplicated[b == c] && appears[{a, d}, b-c],
 
-and[a___, b_ < c_, d___] :> and[b<c, (and[a, d] /. RulesFrom[b<c])] /;
+And[a___, b_ < c_, d___] :> And[b<c, (And[a, d] /. RulesFrom[b<c])] /;
 	!TooComplicated[b<c] && appears[{a, d}, b-c],
 
-and[a___, b_ <= c_, d___] :> and[b<=c, (and[a, d] /. RulesFrom[b<=c])] /;
+And[a___, b_ <= c_, d___] :> And[b<=c, (And[a, d] /. RulesFrom[b<=c])] /;
 	!TooComplicated[b<=c] && appears[{a, d}, b-c],
 
-and[a___, b_ == c_, d___] :> and[b==c, (and[a, d] /. RulesFrom[b==c])] /;
+And[a___, b_ == c_, d___] :> And[b==c, (And[a, d] /. RulesFrom[b==c])] /;
 	!TooComplicated[b==c] && appears[{a, d}, b-c],
 
 
@@ -127,9 +127,9 @@ appears[f_, a_] :=
 
 (* Global rules for the negation of inequalities. *)
 
-not[a_ < b_] := (b <= a);
+Not[a_ < b_] := (b <= a);
 
-not[a_ <= b_] := (b < a);
+Not[a_ <= b_] := (b < a);
 
 
 

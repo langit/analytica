@@ -39,7 +39,7 @@ CongruenceRules = {
 		integer[n] &&  congruent[a, b, m] && WeakSimplify[n>=0];
 
 	congruent[a_, b_, m_ n_] := 
-		and[congruent[a, b, m], congruent[a, b, n]] /; 
+		And[congruent[a, b, m], congruent[a, b, n]] /; 
 		gcd[m, n] == 1;
 
 	congruent[a_, b_, m_ n_] := 

@@ -47,20 +47,20 @@ Protect[Max,  Min];
 
 MaxMinRules = {
 
-(Min[a_, b_] < c_) :> or[a<c, b<c],
+(Min[a_, b_] < c_) :> Or[a<c, b<c],
 
-(Max[a_, b_] < c_) :> and[a<c, b<c],
+(Max[a_, b_] < c_) :> And[a<c, b<c],
 
-(c_ < Min[a_, b_]) :> and[c<a, c<b],
+(c_ < Min[a_, b_]) :> And[c<a, c<b],
 
-(c_ < Max[a_, b_]) :> or[c<a, c<b],
+(c_ < Max[a_, b_]) :> Or[c<a, c<b],
 
-(Min[a_, b_] <= c_) :> or[a<=c, b<=c],
+(Min[a_, b_] <= c_) :> Or[a<=c, b<=c],
 
-(Max[a_, b_] <= c_) :> and[a<=c, b<=c],
+(Max[a_, b_] <= c_) :> And[a<=c, b<=c],
 
-(c_ <= Min[a_, b_]) :> and[c<=a, c<=b],
+(c_ <= Min[a_, b_]) :> And[c<=a, c<=b],
 
-(c_ <= Max[a_, b_]) :> or[c<=a, c<=b]
+(c_ <= Max[a_, b_]) :> Or[c<=a, c<=b]
 
 };

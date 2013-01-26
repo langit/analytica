@@ -20,11 +20,11 @@ some[{}, f_] := f;
 
 all[x_, f_] := f /; FreeQ[f, x];
 
-all[x_, and[a___, b_, c___]] := and[a, all[x, b], c] /; FreeQ[{a, c}, x];
+all[x_, And[a___, b_, c___]] := And[a, all[x, b], c] /; FreeQ[{a, c}, x];
 
-all[x_, or[a___, b_, c___]] := or[a, all[x, b], c] /; FreeQ[{a, c}, x];
+all[x_, Or[a___, b_, c___]] := Or[a, all[x, b], c] /; FreeQ[{a, c}, x];
 
-all[x_, not[b_]] := not[some[x, b]];
+all[x_, Not[b_]] := Not[some[x, b]];
 
 all[x_, imp[a_, b_]] := imp[a, all[x, b]] /; FreeQ[a, x];
 
@@ -34,11 +34,11 @@ all[x_, imp[a_, b_]] := imp[some[x, a], b] /; FreeQ[b, x];
 
 some[x_, f_] := f /; FreeQ[f, x];
 
-some[x_, and[a___, b_, c___]] := and[a, some[x, b], c] /; FreeQ[{a, c}, x];
+some[x_, And[a___, b_, c___]] := And[a, some[x, b], c] /; FreeQ[{a, c}, x];
 
-some[x_, or[a___, b_, c___]] := or[a, some[x, b], c] /; FreeQ[{a, c}, x];
+some[x_, Or[a___, b_, c___]] := Or[a, some[x, b], c] /; FreeQ[{a, c}, x];
 
-some[x_, not[b_]] := not[all[x, b]];
+some[x_, Not[b_]] := Not[all[x, b]];
 
 some[x_, imp[a_, b_]] := imp[a, some[x, b]] /; FreeQ[a, x];
 
@@ -50,7 +50,7 @@ some[x_, imp[a_, b_]] := imp[all[x, a], b] /; FreeQ[b, x];
 
 all[x_, restrict_, f_] := all[x, imp[restrict, f]];
 
-some[x_, restrict_, f_] := some[x, and[f, restrict]];
+some[x_, restrict_, f_] := some[x, And[f, restrict]];
 
 
 
@@ -72,20 +72,20 @@ SomeQuantifier = -1;
 Skolemize[seq[a_, b_], position_, vars_] :=
         seq[Skolemize[a, -position, vars], Skolemize[b, position, vars]];
 
-Skolemize[and[a_, b__], position_, vars_] :=
-        and[Skolemize[a, position, vars], Skolemize[and[b], position, vars]];
+Skolemize[And[a_, b__], position_, vars_] :=
+        And[Skolemize[a, position, vars], Skolemize[And[b], position, vars]];
         
-Skolemize[and[a_], position_, vars_] := Skolemize[a, position, vars];
+Skolemize[And[a_], position_, vars_] := Skolemize[a, position, vars];
 
-Skolemize[or[a_, b__], position_, vars_] :=
-        or[Skolemize[a, position, vars], Skolemize[or[b], position, vars]];
+Skolemize[Or[a_, b__], position_, vars_] :=
+        Or[Skolemize[a, position, vars], Skolemize[Or[b], position, vars]];
         
-Skolemize[or[a_], position_, vars_] := Skolemize[a, position, vars];
+Skolemize[Or[a_], position_, vars_] := Skolemize[a, position, vars];
 
 Skolemize[imp[a_, b_], position_, vars_] :=
         imp[Skolemize[a, -position, vars], Skolemize[b, position, vars]];
 
-Skolemize[not[a_], position_, vars_] := not[Skolemize[a, -position, vars]];
+Skolemize[Not[a_], position_, vars_] := Not[Skolemize[a, -position, vars]];
 
 Skolemize[all[x_, a_],  position_, vars_] :=
 	If[Positive[position],

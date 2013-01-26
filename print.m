@@ -197,7 +197,7 @@ Printform[f_] :=
 	HoldForm[f] //. Abbreviation //. OperatorForm;
 
 OperatorForm = 
-	{and ->And, or -> Or, not[a_==b_] :> a!=b, not -> Not, 
+	{and ->And, or -> Or, Not[a_==b_] :> a!=b, not -> Not, 
 	infinity -> Infinity, sum -> Sum, product -> Product, 
 	complex[a_, Times[b_, c__]] :> a + Times[b, c, I],
 	complex[a_, b_] :> a + b I};

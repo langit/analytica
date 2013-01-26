@@ -18,7 +18,7 @@ Abs /: (Abs[a_] <= 0) := (a == 0);
 
 Abs /: (Abs[a_] == 0) := (a == 0);
 
-Abs /: (0 < Abs[a_]) := not[a==0];
+Abs /: (0 < Abs[a_]) := Not[a==0];
 
 Abs /: (0 <= Abs[a_]) := True;
 

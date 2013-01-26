@@ -12,7 +12,7 @@
 (* Check if one of the disjuncts of the second argument unifies with a 
    conjunct of the first. *)
 
-disjunct[h_, or[a_, b__]] := orelse[disjunct[h, a], disjunct[h, or[b]]];
+disjunct[h_, Or[a_, b__]] := orelse[disjunct[h, a], disjunct[h, Or[b]]];
 
 
 
@@ -27,8 +27,8 @@ disjunct[h_, c_] :=
 
 (* Check if the second argument matches a conjunct of the first. *)
 
-conjunct[and[a_, b__],  c_] :=  
-        orelse[conjunct[a, c],  conjunct[and[b],  c]];
+conjunct[And[a_, b__],  c_] :=  
+        orelse[conjunct[a, c],  conjunct[And[b],  c]];
 
 conjunct[h_, c_] :=  Block[{u},
  

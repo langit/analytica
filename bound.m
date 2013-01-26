@@ -256,8 +256,8 @@ DeleteZero[a_] := a;
    bounds for the summation. *)
 
 LowerSum[a_, {v_, min_, max_}] := EvaluateAssuming[
-	and[v>=min, v<=max],
-	Join[If[TrueQ[WeakSimplify[and[a>=0, min <= max]]], 
+	And[v>=min, v<=max],
+	Join[If[TrueQ[WeakSimplify[And[a>=0, min <= max]]], 
 		{a /. v->min, a /. v->max}, {}],
 	     Map[sum[#, {v, min, max}]&, Lower[a]]]];
 
@@ -266,7 +266,7 @@ LowerSum[a_, {v_, min_, max_}] := EvaluateAssuming[
    the total summation *)
 
 LowerSum[a_, {v_, min_, max_, cond_}] := EvaluateAssuming[
-	and[v>=min, v<=max, cond],
+	And[v>=min, v<=max, cond],
 	Join[If[TrueQ[WeakSimplify[a<=0]], 
 		{sum[a, {v, min, max}]},
 		{}],
@@ -288,7 +288,7 @@ Strict/: Strict[Strict[a_]] := Strict[a];
 
 Strict/: a_ + Strict[b_] := Strict[a + b];
 
-Strict/: a_ Strict[b_] := If[TrueQ[WeakSimplify[or[a>0, a<0]]], Strict[a b], a b];
+Strict/: a_ Strict[b_] := If[TrueQ[WeakSimplify[Or[a>0, a<0]]], Strict[a b], a b];
 
 Strict/: Strict[a_]^b_ := Strict[a^b];
 

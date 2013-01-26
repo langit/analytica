@@ -121,18 +121,18 @@ SetAttributes[ProveAndSave, {HoldAll}];
 
 ProveAndSave[form_] := (Prove[form]; Given[form]);
 
-ProveAndSave[form__] := (Prove[and[form]]; Given[form]);
+ProveAndSave[form__] := (Prove[And[form]]; Given[form]);
 
 (* save to another section *)
 
 
-ProveAndSaveTo[form__, a_] := (Prove[and[form]]; GivenTo[and[form], a]);
+ProveAndSaveTo[form__, a_] := (Prove[And[form]]; GivenTo[And[form], a]);
 
 
 
 (* save given formulas in current section *)
 
-Given[a__] := GivenTo[and[a], CurrentSection];
+Given[a__] := GivenTo[And[a], CurrentSection];
 
 
 (* save given formulas to some directed section *)
@@ -140,8 +140,8 @@ Given[a__] := GivenTo[and[a], CurrentSection];
 GivenTo[form_, section_] := 
 	AddKnowledge[WeakSimplify[form], section];
 
-AddKnowledge[and[a_, b__], section_] := 
-	( AddKnowledge[a, section]; AddKnowledge[and[b], section] );
+AddKnowledge[And[a_, b__], section_] := 
+	( AddKnowledge[a, section]; AddKnowledge[And[b], section] );
 
 AddKnowledge[form_, section_] := (
 

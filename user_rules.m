@@ -7,7 +7,7 @@ Rewriting[s_] := Block[{s0, s1}, (
 
 	(* Apply user-defined rewrite rules. *)
 
-	s0 = EvaluateAssuming[not[s], s //. UserRules];
+	s0 = EvaluateAssuming[Not[s], s //. UserRules];
 
 	(* If changed during rewriting, simplify the sequent *)
 

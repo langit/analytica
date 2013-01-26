@@ -17,60 +17,60 @@ seq[False, _] := True;
 
 seq[a_, a_] := True;
 
-seq[and[a___, b_, c___], b_] := True;
+seq[And[a___, b_, c___], b_] := True;
 
 
 
 (* Implication in the conclusion *)
 
-seq[a_, imp[b_, c_]] := seq[and[b, a], c];
+seq[a_, imp[b_, c_]] := seq[And[b, a], c];
 
-seq[a_, seq[b_, c_]] := seq[and[b, a], c];
+seq[a_, seq[b_, c_]] := seq[And[b, a], c];
 
 
 
 (* Implication in the hypothesis *)
 
-seq[imp[a_, b_], c_] := seq[or[not[a], b], c];
+seq[imp[a_, b_], c_] := seq[Or[Not[a], b], c];
 
-seq[and[h1___, imp[a_, b_], h2___], c_] := 
-        seq[and[h1, or[not[a], b], h2], c];
+seq[And[h1___, imp[a_, b_], h2___], c_] := 
+        seq[And[h1, Or[Not[a], b], h2], c];
 
 
-seq[seq[a_, b_], c_] := seq[or[not[a], b], c];
+seq[seq[a_, b_], c_] := seq[Or[Not[a], b], c];
 
-seq[and[h1___, seq[a_, b_], h2___], c_] := 
-        seq[and[h1, or[not[a], b], h2], c];
+seq[And[h1___, seq[a_, b_], h2___], c_] := 
+        seq[And[h1, Or[Not[a], b], h2], c];
 
 
 
 (* Negation of a sequent *)
 
-not[seq[a_, b_]] := and[a, not[b]];
+Not[seq[a_, b_]] := And[a, Not[b]];
 
 
 
 (* Additional operations on sequents *)
 
-or[a___, seq[h_, c_], b___] := seq[h, or[a, c, b]];
+Or[a___, seq[h_, c_], b___] := seq[h, Or[a, c, b]];
 
-imp[a_, seq[h_, c_]] := seq[and[a, h], c];
+imp[a_, seq[h_, c_]] := seq[And[a, h], c];
 
 
 
 (* Negation in the hypothesis *)
 
-seq[not[a_], c_] := seq[True, or[a, c]];
+seq[Not[a_], c_] := seq[True, Or[a, c]];
 
-seq[and[h1___, not[a_], h2___], c_] := seq[and[h1, h2], or[a, c]];
+seq[And[h1___, Not[a_], h2___], c_] := seq[And[h1, h2], Or[a, c]];
 
 
 
 (* Negation in the conclusion *)
 
-seq[h_, not[a_]] := seq[and[h, a], False];
+seq[h_, Not[a_]] := seq[And[h, a], False];
 
-seq[h_, or[c1___, not[a_], c2___]] := seq[and[h, a], or[c1, c2]];
+seq[h_, Or[c1___, Not[a_], c2___]] := seq[And[h, a], Or[c1, c2]];
 
 
 
@@ -80,55 +80,55 @@ seq[h_, or[c1___, not[a_], c2___]] := seq[and[h, a], or[c1, c2]];
 
 (* Rules for "or" *)
 
-or[] := False;
+Or[] := False;
 
-or[a___, NIL, b___] := or[a, b];
+Or[a___, NIL, b___] := Or[a, b];
 
-or[x_] := x;
+Or[x_] := x;
 
-or[d___, or[a_, b__], c___] := or[d, a, b, c];
+Or[d___, Or[a_, b__], c___] := Or[d, a, b, c];
 
-or[d___, imp[a_, b_], c___] := imp[a, or[d, b, c]];
+Or[d___, imp[a_, b_], c___] := imp[a, Or[d, b, c]];
 
-or[a___, False, b___] := or[a, b];
+Or[a___, False, b___] := Or[a, b];
 
-or[t1___, True, t2___] = True;
+Or[t1___, True, t2___] = True;
 
-or[a___, b_, c___, b_, d___] := or[a, b, c, d];
+Or[a___, b_, c___, b_, d___] := Or[a, b, c, d];
 
-or[___, a_, ___, not[a_], ___] = True;
+Or[___, a_, ___, Not[a_], ___] = True;
 
-or[___, not[a_], ___, a_, ___] = True;
+Or[___, Not[a_], ___, a_, ___] = True;
 
-or[a___, b_, c___, and[___, b_, ___], d___] := or[a, b, c, d];
+Or[a___, b_, c___, And[___, b_, ___], d___] := Or[a, b, c, d];
 
-or[a___, and[___, b_, ___], c___, b_, d___] := or[a, b, c, d];
+Or[a___, And[___, b_, ___], c___, b_, d___] := Or[a, b, c, d];
 
 
 
 (* Rules for "and" *)
 
-and[] := True;
+And[] := True;
 
-and[a___, NIL, b___] := and[a, b];
+And[a___, NIL, b___] := And[a, b];
 
-and[x_] := x;
+And[x_] := x;
 
-and[d___, and[a_, b__], c___] := and[d, a, b, c];
+And[d___, And[a_, b__], c___] := And[d, a, b, c];
 
-and[a___, True, b___] := and[a, b];
+And[a___, True, b___] := And[a, b];
 
-and[t1___, False, t2___] = False;
+And[t1___, False, t2___] = False;
 
-and[a___, b_, c___, b_, d___] := and[a, b, c, d];
+And[a___, b_, c___, b_, d___] := And[a, b, c, d];
 
-and[___, a_, ___, not[a_], ___] = False;
+And[___, a_, ___, Not[a_], ___] = False;
 
-and[___, not[a_], ___, a_, ___] = False;
+And[___, Not[a_], ___, a_, ___] = False;
 
-and[a___, b_, c___, or[___, b_, ___], d___] := and[a, b, c, d];
+And[a___, b_, c___, Or[___, b_, ___], d___] := And[a, b, c, d];
 
-and[a___, or[___, b_, ___], c___, b_, d___] := and[a, b, c, d];
+And[a___, Or[___, b_, ___], c___, b_, d___] := And[a, b, c, d];
 
 
 
@@ -140,33 +140,33 @@ imp[False, _] := True;
 
 imp[True, x_] := x;
 
-imp[x_, False] := not[x];
+imp[x_, False] := Not[x];
 
 imp[x_, x_] := True;
 
-imp[a_, imp[b_, c_]] := imp[and[a, b], c];
+imp[a_, imp[b_, c_]] := imp[And[a, b], c];
 
 
 
 (* Rules for  "not" *)
 
-not[True] = False;
+Not[True] = False;
 
-not[False] = True;
+Not[False] = True;
 
-not[not[a_]] := a;
+Not[Not[a_]] := a;
 
-not[and[a_, b__]] := or[not[a],not[and[b]]];
+Not[And[a_, b__]] := Or[Not[a],Not[And[b]]];
 
-not[or[a_, b__]] := and[not[a],not[or[b]]];
+Not[Or[a_, b__]] := And[Not[a],Not[Or[b]]];
 
-not[imp[a_, b_]] := and[a, not[b]];
+Not[imp[a_, b_]] := And[a, Not[b]];
 
 
 
 (* Logical equivalence *)
 
-eqv[a_, b_] = and[imp[a, b], imp[b, a]];
+eqv[a_, b_] = And[imp[a, b], imp[b, a]];
 
 
 
@@ -174,7 +174,7 @@ eqv[a_, b_] = and[imp[a, b], imp[b, a]];
 
 if[_, f_, f_] := f;
 
-if[test_, f1_, f2_] :=   and[imp[test, f1],  imp[not[test], f2]];
+if[test_, f1_, f2_] :=   And[imp[test, f1],  imp[Not[test], f2]];
 
 
 

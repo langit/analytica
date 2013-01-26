@@ -35,23 +35,23 @@ AddLemma[lemma_] :=
 
 (* Add a lemma to the data base. *)
 
-AddToDataBase[and[a_, b__]] := (AddToDataBase[a]; AddToDataBase[and[b]];);
+AddToDataBase[And[a_, b__]] := (AddToDataBase[a]; AddToDataBase[And[b]];);
 
-AddToDataBase[imp[a_, and[b_, c__]]] := 
-	(AddToDataBase[imp[a, b]]; AddToDataBase[imp[a, and[c]]];);
+AddToDataBase[imp[a_, And[b_, c__]]] := 
+	(AddToDataBase[imp[a, b]]; AddToDataBase[imp[a, And[c]]];);
 
 
 
 (* Add to "Lemmas". *)
 
 AddToDataBase[imp[a_, b_]] := 
-	(Lemmas[Head[b]] = and[imp[a, b], Lemmas[Head[b]]];);
+	(Lemmas[Head[b]] = And[imp[a, b], Lemmas[Head[b]]];);
 
 
 
 (* Add to "Facts". *)
 
-AddToDataBase[a_] := (Facts[Head[a]] = and[a, Facts[Head[a]]];);
+AddToDataBase[a_] := (Facts[Head[a]] = And[a, Facts[Head[a]]];);
 
 
 

@@ -70,10 +70,10 @@ power[a_, b_] := a^b /; FreeQ[b, infinity] && FreeQ[b, limit];
 
 power[a_, infinity] := 
 	If[TrueQ[WeakSimplify[a>1]], infinity, 0] /; 
-	WeakSimplify[or[a>1, and[a < 1, a > -1]]];
+	WeakSimplify[Or[a>1, And[a < 1, a > -1]]];
 
 power[a_, -infinity] := 
 	If[TrueQ[WeakSimplify[a>1]], 0, infinity] /; 
-	WeakSimplify[or[a>1, and[a < 1, a > -1]]];
+	WeakSimplify[Or[a>1, And[a < 1, a > -1]]];
 
 

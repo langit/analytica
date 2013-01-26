@@ -77,13 +77,13 @@ Unprotect[Binomial];
 
 Binomial/: (0 <= Binomial[a_, b_]) := True;
 
-Binomial/: (0 < Binomial[a_, b_]) := not[Binomial[a, b] == 0];
+Binomial/: (0 < Binomial[a_, b_]) := Not[Binomial[a, b] == 0];
 
 Binomial/: (Binomial[a_, b_] <= 0) := (Binomial[a, b] == 0);
 
 Binomial/: (Binomial[a_, b_] < 0) := False;
 
-Binomial/: (Binomial[a_, b_] == 0) := or[b < 0, 0 < b-a];
+Binomial/: (Binomial[a_, b_] == 0) := Or[b < 0, 0 < b-a];
 
 Protect[Binomial];
 
@@ -112,21 +112,21 @@ n1_. sum[a_, range_] + n2_ sum[b_, range_] :> sum[(n1 a + n2 b), range],
 
 
 
-(* sum[f, {k, n1, n2, cond}] + sum[f, {k, n1, n2, not[cond]}] ==
+(* sum[f, {k, n1, n2, cond}] + sum[f, {k, n1, n2, Not[cond]}] ==
    sum[f, {k, n1, n2}] *)
 
 a_. sum[f_, {v_, min_, max_}] + b_. sum[f_, {v_, min_, max_, cond_}] :>
-	a sum[f, {v, min, max, not[cond]}] /; (a+b === 0),
+	a sum[f, {v, min, max, Not[cond]}] /; (a+b === 0),
 
 
 
 (* sum[f, {k, n1, n2, cond1}] + sum[f, {k, n1, n2, cond2}] ==
-   sum[f, {k, n1, n2, or[cond1, cond2]}] when and[cond1, cond2] = False *)
+   sum[f, {k, n1, n2, Or[cond1, cond2]}] when And[cond1, cond2] = False *)
 
 a_. sum[f_, {v_, min_, max_, cond1_}] + 
 a_. sum[f_, {v_, min_, max_, cond2_}] :>
-	a sum[f, {v, min, max, WeakSimplify[or[cond1, cond2]]}] /; 
-	(!WeakSimplify[and[cond1, cond2]]),
+	a sum[f, {v, min, max, WeakSimplify[Or[cond1, cond2]]}] /; 
+	(!WeakSimplify[And[cond1, cond2]]),
 
 
 
@@ -300,7 +300,7 @@ RewriteSum[s_] := Block[{s0, s1}, (
 
 	(* Rewrite summation expressions. *)
 
-	s0 = EvaluateAssuming[not[s], s //. SumRewriteRules]; 
+	s0 = EvaluateAssuming[Not[s], s //. SumRewriteRules]; 
 
  	s0 = GosperSimplify[s0]; 
 

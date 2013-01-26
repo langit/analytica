@@ -18,7 +18,7 @@ InductionOn[x_, {n_, {main_, others_}}] := Block[{temp}, (
 
 	If[!FreeQ[InductionVariables, x], Return[False]];
 
-	temp = EvaluateAssuming[and[n<=x, integer[x]], WeakSimplify[main]];
+	temp = EvaluateAssuming[And[n<=x, integer[x]], WeakSimplify[main]];
 
 	AppendTo[InductionVariables, x];
 
@@ -32,7 +32,7 @@ InductionOn[x_, {n_, {main_, others_}}] := Block[{temp}, (
 
 	(* if one of the bases fails, return with fail *)
 
-	If[FalseQ[Verify[or[others, temp /. x -> n]]], 
+	If[FalseQ[Verify[Or[others, temp /. x -> n]]], 
 
 		PrintResult["RESULT", Fail];
 		InductionVariables = Drop[InductionVariables, -1];
@@ -41,7 +41,7 @@ InductionOn[x_, {n_, {main_, others_}}] := Block[{temp}, (
 	(* the induction steps *)
 	
 	print["induction step"];
-	temp = Verify[or[others, seq[and[integer[x], n<=x, temp], temp/.x->x+1]]];
+	temp = Verify[Or[others, seq[And[integer[x], n<=x, temp], temp/.x->x+1]]];
 	InductionVariables = Drop[InductionVariables, -1];
 	Return[temp];
 )];
@@ -50,20 +50,20 @@ InductionOn[x_, {n_, {main_, others_}}] := Block[{temp}, (
 DeriveInductScheme[x_, f_] :=
 	{GetBase[x, f], SeperateMain[x, f, {False, False}]};
 
-SeperateMain[x_, seq[True, or[a_, b__]], {main_, others_}] := 
+SeperateMain[x_, seq[True, Or[a_, b__]], {main_, others_}] := 
 	If[FreeQ[a, x],
-	   SeperateMain[x, seq[True, or[b]], {main, or[others, a]}],
-	   SeperateMain[x, seq[True, or[b]], {or[a, main], others}]];
+	   SeperateMain[x, seq[True, Or[b]], {main, Or[others, a]}],
+	   SeperateMain[x, seq[True, Or[b]], {Or[a, main], others}]];
 
 SeperateMain[x_, seq[True, c_], {main_, others_}] := 
 	If[FreeQ[c, x],
-	   {main, or[others, c]},
-	   {or[c, main], others}];
+	   {main, Or[others, c]},
+	   {Or[c, main], others}];
 
-SeperateMain[x_, seq[and[a_, b__], c_], {main_, others_}] := 
+SeperateMain[x_, seq[And[a_, b__], c_], {main_, others_}] := 
 	If[FreeQ[a, x],
-	   SeperateMain[x, seq[and[b], c], {main, seq[a, others]}],
-	   SeperateMain[x, seq[and[b], c], {seq[a, main], others}]];
+	   SeperateMain[x, seq[And[b], c], {main, seq[a, others]}],
+	   SeperateMain[x, seq[And[b], c], {seq[a, main], others}]];
 
 SeperateMain[x_, seq[h_, c_], {main_, others_}] := 
 	If[FreeQ[h, x],
@@ -72,11 +72,11 @@ SeperateMain[x_, seq[h_, c_], {main_, others_}] :=
 
 SeperateMain[x_, a_, {main_, others_}] := 
 	If[FreeQ[a, x],
-	   {main, or[others, a]},
-	   {or[a, main], others}];
+	   {main, Or[others, a]},
+	   {Or[a, main], others}];
 
 GetBase[x_, f_] :=
-	EvaluateAssuming[not[f], 
+	EvaluateAssuming[Not[f], 
 	  If[!TrueQ[WeakSimplify[integer[x]]] 
 	       || !useful[x, f, StrongSimplify[f/.x->x+1]], 
 	     -Infinity,
@@ -85,9 +85,9 @@ GetBase[x_, f_] :=
 	
 useful[x_, f1_, seq[h_, c_]] := useful[x, seq[h, f1], c];
 
-useful[x_, f1_, or[a_, b__]] := useful[x, f1, a] && useful[x, f2, or[b]];
+useful[x_, f1_, Or[a_, b__]] := useful[x, f1, a] && useful[x, f2, Or[b]];
 
-useful[x_, f1_, and[a_, b__]] := useful[x, f1, a] && useful[x, f2, and[b]];
+useful[x_, f1_, And[a_, b__]] := useful[x, f1, a] && useful[x, f2, And[b]];
 
 useful[x_, f1_, imp[a_, b_]] := useful[x, f1, a] && useful[x, f1, b];
 

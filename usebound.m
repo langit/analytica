@@ -6,17 +6,17 @@ ProveUsingBound[s_] := (
 	If[DepthCount == 0, Bounds[0] = Bounds[1] = Bounds[2] = {}];
 	If[DepthCount >= DepthBound, False, TryingUsingBound[False, s]]);
 
-TryingUsingBound[c0_, seq[h_, or[c1_, c2__]]] :=
-	orelse[ UsingBound[seq[h, or[c0, c2]], c1], TryingUsingBound[or[c0, c1], seq[h, or[c2]]]];
+TryingUsingBound[c0_, seq[h_, Or[c1_, c2__]]] :=
+	orelse[ UsingBound[seq[h, Or[c0, c2]], c1], TryingUsingBound[Or[c0, c1], seq[h, Or[c2]]]];
 
-TryingUsingBound[s0_, seq[and[h1_, h2__], False]] :=
-	orelse[ UsingBound[seq[and[h2], s0], not[h1]], TryingUsingBound[seq[h1, s0], seq[and[h2], False]]];
+TryingUsingBound[s0_, seq[And[h1_, h2__], False]] :=
+	orelse[ UsingBound[seq[And[h2], s0], Not[h1]], TryingUsingBound[seq[h1, s0], seq[And[h2], False]]];
 
 TryingUsingBound[s0_, seq[h_, False]] :=
-	UsingBound[s0, not[h]];
+	UsingBound[s0, Not[h]];
 
 TryingUsingBound[c0_, seq[h_, c1_]] := 
-	orelse[UsingBound[seq[h, c0], c1], TryingUsingBound[seq[True, or[c0, c1]], seq[h, False]]];
+	orelse[UsingBound[seq[h, c0], c1], TryingUsingBound[seq[True, Or[c0, c1]], seq[h, False]]];
 
 TryingUsingBound[a_, b_] := False;
 
@@ -25,12 +25,12 @@ TryingUsingBound[a_, b_] := False;
    by their upper or lower bounds *)
 
 UsingBound[s_, a_ < b_] := 
-	UseBound[s, SortingByLength[ EvaluateAssuming[not[s], 
+	UseBound[s, SortingByLength[ EvaluateAssuming[Not[s], 
 			SimplifyEach[Join[Map[#<b &, Upper[a]],
 					  Map[a<# &, Lower[b]]]] /. Strict -> Identity]]];
 
 UsingBound[s_, a_ <= b_] := 
-	UseBound[s, SortingByLength[ EvaluateAssuming[not[s], 
+	UseBound[s, SortingByLength[ EvaluateAssuming[Not[s], 
 			SimplifyEach[Join[Map[#<=b &, Upper[a]],
 					  Map[a<=# &, Lower[b]]]] /. Strict -> Identity]]];
 
@@ -58,21 +58,21 @@ UseBound[s_, True] := (
 
 UseBound[s_, {a___, {_, m_, True}, c___}] := (
 	print["replace expression with its lower or upper bounds"];
-	PrintMessage[Map[{#[[1]], or[s, #[[2]]]}&, m]]; 
+	PrintMessage[Map[{#[[1]], Or[s, #[[2]]]}&, m]]; 
 	PrintSequent[True];
 	TryOtherBranches[True]);
 
 UseBound[s_, {{_, m_, b1_}}] := Block[{DepthCount = DepthCount + 1}, (
 	print["replace expression with its lower or upper bounds"];
-	PrintMessage[Map[{#[[1]], or[s, #[[2]]]}&, m]]; 
-	SucceedWith[TryProving[or[s, b1]]])];
+	PrintMessage[Map[{#[[1]], Or[s, #[[2]]]}&, m]]; 
+	SucceedWith[TryProving[Or[s, b1]]])];
 
 
 UseBound[s_, b_] := Block[{DepthCount = DepthCount + 1},
 
 	print["replace expression with its lower or upper bounds"];
 
-	PrintSequent1[or[s, Apply[or, Map[#[[1]]&, b]]]];
+	PrintSequent1[Or[s, Apply[or, Map[#[[1]]&, b]]]];
 	print1["      - - - - - - - A", ToString[DepthCount], "\n"];
 
 	TryEach[s, b]];
@@ -115,6 +115,6 @@ TryEach[s_, {a_, b__}] :=
 
 TryEach[s_, {{_, m_, a1_}}] := (
 	print1["part of  \"A", ToString[DepthCount], "\""];
-	PrintMessage[Map[{#[[1]], or[s, #[[2]]]}&, m]]; 
-	SucceedWith[TryProving[or[s, a1]]]);
+	PrintMessage[Map[{#[[1]], Or[s, #[[2]]]}&, m]]; 
+	SucceedWith[TryProving[Or[s, a1]]]);
 

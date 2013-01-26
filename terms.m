@@ -71,11 +71,11 @@ TermsIn[imp[a_, b_]] := Union[TermsIn[a], TermsIn[b]];
 
 TermsIn[seq[a_, b_]] := Union[TermsIn[a], TermsIn[b]];
 
-TermsIn[and[a_, b__]] := Apply[Union, Map[TermsIn, {a, b}]];
+TermsIn[And[a_, b__]] := Apply[Union, Map[TermsIn, {a, b}]];
 
-TermsIn[or[a_, b__]] := Apply[Union, Map[TermsIn, {a, b}]];
+TermsIn[Or[a_, b__]] := Apply[Union, Map[TermsIn, {a, b}]];
 
-TermsIn[not[a_]] := TermsIn[a];
+TermsIn[Not[a_]] := TermsIn[a];
 
 TermsIn[p_[a___]] := Apply[Union, Map[BasicTermsIn, {a}]];
 

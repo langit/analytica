@@ -77,8 +77,8 @@ SolveSequent[a_] := a;
 
 (* Solve the equations in the hypothesis. *)
 
-SolveForHypothesis[and[h_, rest__]] :=
-        and[solve[h, 0], SolveForHypothesis[and[rest]]];
+SolveForHypothesis[And[h_, rest__]] :=
+        And[solve[h, 0], SolveForHypothesis[And[rest]]];
 
 SolveForHypothesis[h_] :=
         solve[h, 0];
@@ -88,8 +88,8 @@ SolveForHypothesis[h_] :=
 (* Solve equations in the conclusion for existentially
 quantified variables. *)
 
-SolveForConclusion[or[c_, rest__]] :=
-        or[solve[c, 1], SolveForConclusion[or[rest]]];
+SolveForConclusion[Or[c_, rest__]] :=
+        Or[solve[c, 1], SolveForConclusion[Or[rest]]];
 
 SolveForConclusion[c_] :=
         solve[c, 1];

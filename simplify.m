@@ -51,11 +51,11 @@ StrongSimplify[f_] := (
 
 (* Simplify formulas using local context. *)
 
-SimplifyUsingContext[or[a_, b__]] := 
-	UsingContext[Map[SimplifyUsingContext, or[a, b]]];
+SimplifyUsingContext[Or[a_, b__]] := 
+	UsingContext[Map[SimplifyUsingContext, Or[a, b]]];
 
-SimplifyUsingContext[and[a_, b__]] := 
-	UsingContext[Map[SimplifyUsingContext, and[a, b]]];
+SimplifyUsingContext[And[a_, b__]] := 
+	UsingContext[Map[SimplifyUsingContext, And[a, b]]];
 
 SimplifyUsingContext[imp[a_, b_]] := 
 	UsingContext[Map[SimplifyUsingContext, imp[a, b]]];
@@ -69,9 +69,9 @@ SimplifyUsingContext[f_] := f;
 (* Simplify a sub-formula using information provided by its
 context. *)
 
-UsingContext[and[a_, b__]] := SimplifyAnd[True, and[a, b]];
+UsingContext[And[a_, b__]] := SimplifyAnd[True, And[a, b]];
 
-UsingContext[or[a_, b__]] := SimplifyOr[False, or[a, b]];
+UsingContext[Or[a_, b__]] := SimplifyOr[False, Or[a, b]];
 
 UsingContext[imp[a_, b_]] := (imp[AssumeFalse[#, a], #]&) [AssumeTrue[a, b]];
 
@@ -83,19 +83,19 @@ UsingContext[f_] := f;
 
 (* Use each conjunct to simplify the remainder of the conjunction. *)
 
-SimplifyAnd[f1_, and[a_, b__]] := 
-	SimplifyAnd[and[AssumeTrue[a, f1], a], AssumeTrue[a, and[b]]];
+SimplifyAnd[f1_, And[a_, b__]] := 
+	SimplifyAnd[And[AssumeTrue[a, f1], a], AssumeTrue[a, And[b]]];
 
-SimplifyAnd[f1_, a_] := and[AssumeTrue[a, f1], a];
+SimplifyAnd[f1_, a_] := And[AssumeTrue[a, f1], a];
 
 
 (* Use each disjunct to simplify the remainder of the disjunction. *)
 
-SimplifyOr[f1_, or[a_, b__]] := 
-	SimplifyOr[or[AssumeFalse[a, f1], a], AssumeFalse[a, or[b]]];
+SimplifyOr[f1_, Or[a_, b__]] := 
+	SimplifyOr[Or[AssumeFalse[a, f1], a], AssumeFalse[a, Or[b]]];
 
 SimplifyOr[f1_, a_] := 
-	or[AssumeFalse[a, f1], a];
+	Or[AssumeFalse[a, f1], a];
 
 
 (* Simplify the second argument assuming the first argument is true. *)
@@ -105,7 +105,7 @@ AssumeTrue[h_, f_] :=  f /. RulesFrom[h];
 
 (* Simplify the second argument assuming the first argument is false. *)
 
-AssumeFalse[h_, f_] :=  f /. RulesFrom[not[h]];
+AssumeFalse[h_, f_] :=  f /. RulesFrom[Not[h]];
 
 
 (* Extract simplicification rules from a formula. *)
@@ -141,32 +141,32 @@ a<b equivalent a!=b and b<a is false. *)
 RulesFrom[a_ <= b_] :=
 	{(x_ <= y_) :> True  /; (a-b) - (x-y) === 0,
 	 (x_ <= y_) :> (x == y) /; (a-b) + (x-y) === 0,
-	 (x_ <  y_) :> not[x == y] /; (a-b) - (x-y) === 0,
+	 (x_ <  y_) :> Not[x == y] /; (a-b) - (x-y) === 0,
 	 (x_ <  y_) :> False /; (a-b) + (x-y) === 0};
 
 (* If a!=b, then a==b and b==a are both false, a <= b is equivalent to a<b
 and b<=a is equivalent to b<a. *)
 
-RulesFrom[not[a_ == b_]] :=
+RulesFrom[Not[a_ == b_]] :=
 	{(x_ == y_) :> False /; (a-b) - (x-y) === 0 || (a-b) + (x-y) === 0,
 	 (x_ <= y_) :> (x < y) /; (a-b) - (x-y) === 0 || (a-b) + (x-y) === 0};
 
 
-(* If and[a, b], then a and b are both true. *)
+(* If And[a, b], then a and b are both true. *)
 
-RulesFrom[and[a_, b__]] := Union[RulesFrom[a], RulesFrom[and[b]]];
+RulesFrom[And[a_, b__]] := Union[RulesFrom[a], RulesFrom[And[b]]];
 
 
 (* Don't use Complicated formulas as simplifying rules. *)
 
 RulesFrom[imp[__]] := {};
 
-RulesFrom[or[a_, b__]] := {};
+RulesFrom[Or[a_, b__]] := {};
 
 
 (* Other kinds of formulas. *)
 
-RulesFrom[not[f_]] := { f -> False };
+RulesFrom[Not[f_]] := { f -> False };
 
 RulesFrom[h1_] := {h1->True};
 
@@ -193,11 +193,11 @@ AddSoundnessConstraint[imp[h_, c_], position_] :=
 	imp[AddSoundnessConstraint[h, -position], 
 	    AddSoundnessConstraint[c, position]];
 
-AddSoundnessConstraint[or[a_, b__], position_] :=
-	Map[AddSoundnessConstraint[#, position]&, or[a, b]];
+AddSoundnessConstraint[Or[a_, b__], position_] :=
+	Map[AddSoundnessConstraint[#, position]&, Or[a, b]];
 
-AddSoundnessConstraint[and[a_, b__], position_] :=
-	Map[AddSoundnessConstraint[#, position]&, and[a, b]];
+AddSoundnessConstraint[And[a_, b__], position_] :=
+	Map[AddSoundnessConstraint[#, position]&, And[a, b]];
 
 (* The soundness constraint for an atomic formula is the conjunction
 of constraints for each of the quotients within the formula. *)
@@ -207,7 +207,7 @@ soundness constraint is put as an additional conclusion to be proved. *)
 
 AddSoundnessConstraint[f_, 1] :=
 	If[FreeQ[f, over], f,
-		and[Apply[and, Map[Soundness[f], Position[f, _over]]], f]
+		And[Apply[and, Map[Soundness[f], Position[f, _over]]], f]
 			//. over[a_, b_] :> a/b];
 
 (* If the atomic formula is within odd number of negations, the
@@ -220,6 +220,6 @@ AddSoundnessConstraint[f_, -1] :=
 
 (* The constraint for quotient is that the denominator is not zero. *)
 
-Soundness[f_][{a__}] := (not[f[[a]][[2]] == 0]);
+Soundness[f_][{a__}] := (Not[f[[a]][[2]] == 0]);
 
 

@@ -238,7 +238,7 @@ Imply[seq[h_, a_  ==  b_]] :=  Block[{u,u1, temph},
 	  PrintResult["equation", u]; 
 	  TryOtherBranches[u]]])];
 
-Imply[seq[h_, or[c1___, a_  ==  b_,  c2___]]] :=  Block[{u,u1, temph},
+Imply[seq[h_, Or[c1___, a_  ==  b_,  c2___]]] :=  Block[{u,u1, temph},
 	u1 /;
 	(!FalseQ[u = unify[a, b]] && !FalseQ[u1 = SucceedWith[
 	  PrintResult["equation", u]; 
@@ -254,7 +254,7 @@ Imply[seq[h_, a_  <=  b_]] :=  Block[{u,u1, temph},
 	  PrintResult["inequality", u]; 
 	  TryOtherBranches[u]]])];
 
-Imply[seq[h_, or[c1___, a_  <=  b_,  c2___]]] := Block[{u,u1, temph},
+Imply[seq[h_, Or[c1___, a_  <=  b_,  c2___]]] := Block[{u,u1, temph},
 	u1 /;
 	(!FalseQ[u = unify[a, b]] && !FalseQ[u1 = SucceedWith[
 	  PrintResult["inequality", u]; 
@@ -264,16 +264,16 @@ Imply[seq[Var[x_] == f_, c_]] := Block[{u,u1, temph},
 	u1 /;
 	(FreeQ[f, x] && !FalseQ[u1 = SucceedWith[
 	 PrintResult["add restriction:", x != f]; 
-	 Restriction = and[Restriction, not[Var[x] == f]]; 
-	 Given[not[Var[x] == f]];
+	 Restriction = And[Restriction, Not[Var[x] == f]]; 
+	 Given[Not[Var[x] == f]];
 	 TryOtherBranches[True]]])];
 
-Imply[seq[and[h1___, Var[x_] == f_, h2___], c_]] := Block[{u,u1, temph},
+Imply[seq[And[h1___, Var[x_] == f_, h2___], c_]] := Block[{u,u1, temph},
 	u1 /;
 	(FreeQ[f, x] && !FalseQ[u1 = SucceedWith[
 	 PrintResult["add restriction:", x != f]; 
-	 Restriction = and[Restriction, not[Var[x] == f]]; 
-	 Given[not[Var[x] == f]];
+	 Restriction = And[Restriction, Not[Var[x] == f]]; 
+	 Given[Not[Var[x] == f]];
 	 TryOtherBranches[True]]])];
 
 
@@ -290,24 +290,24 @@ Imply[seq[h_, c_]] := u /;(!FalseQ[SucceedWith[u  =  disjunct[h, c]]]);
 
 (* to prove " H -> (A /\ B) " *)
 
-Imply[seq[h_, and[a_, b__]]] := (
+Imply[seq[h_, And[a_, b__]]] := (
 
 	print["and split \n"];
 
 	(* try " H -> A "  first and then try " (H /\ A) -> B " *)
 
-	SequentialTry[ seq[h, a],   seq[and[h, simple[a]], and[b]]]);
+	SequentialTry[ seq[h, a],   seq[And[h, simple[a]], And[b]]]);
 
 (* to prove " H -> (A /\ B) \/ C " *)
 
-Imply[seq[h_, or[c1___, and[a_, b__], c2___]]] := (
+Imply[seq[h_, Or[c1___, And[a_, b__], c2___]]] := (
 
 	print["and split\n"];
 
 	(* try " H -> (A \/ C) " first and then "(H /\ A) -> (B \/ C) " *)
 
-	SequentialTry[ seq[h,  or[c1, a, c2]],
-		seq[and[h, simple[a]],  or[c1, and[b], c2]]]);
+	SequentialTry[ seq[h,  Or[c1, a, c2]],
+		seq[And[h, simple[a]],  Or[c1, And[b], c2]]]);
 
 
 (* prove by "cases" *)
@@ -315,25 +315,25 @@ Imply[seq[h_, or[c1___, and[a_, b__], c2___]]] := (
 
 (* to prove " (A \/ B) -> C " *)
 
-Imply[seq[or[a_, b__], c_]] := (
+Imply[seq[Or[a_, b__], c_]] := (
 
 	print["cases\n"];
 
 	(* try " A -> C " first and then " B -> (C \/ A) " *)
 
-	SequentialTry[ seq[a, c],   seq[or[b], or[c, simple[a]]]]);
+	SequentialTry[ seq[a, c],   seq[Or[b], Or[c, simple[a]]]]);
 
 (* to prove " ( H /\ ( A \/ B )) -> C " *)
 
-Imply[seq[and[h1___, or[a_, b__], h2___], c_]] := (
+Imply[seq[And[h1___, Or[a_, b__], h2___], c_]] := (
 
 	print["cases\n"];
 
 	(* try " (H /\ A) -> C " first and then " (H /\ B) -> (C \/ A) " *)
 
-	SequentialTry[ seq[and[h1, a, h2],  c],
+	SequentialTry[ seq[And[h1, a, h2],  c],
 
-		seq[and[h1, or[b], h2],  or[c, simple[a]]]]);
+		seq[And[h1, Or[b], h2],  Or[c, simple[a]]]]);
 
 
 simple[_or] = simple[_and] = simple[_imp] = NIL;
@@ -343,8 +343,8 @@ simple[a_] := a;
 
 (* Back-chain *)
 
-Imply[seq[h0_, or[c0___, c_, c1___]]] := Block[{u}, u /; 
-	!FalseQ[u = Backchain[seq[h0, or[c0, c1]], Lemmas[Head[c]], c]]];
+Imply[seq[h0_, Or[c0___, c_, c1___]]] := Block[{u}, u /; 
+	!FalseQ[u = Backchain[seq[h0, Or[c0, c1]], Lemmas[Head[c]], c]]];
 
 Imply[seq[h0_, c_]] := Block[{u}, u /; 
 	!FalseQ[u = Backchain[seq[h0, False], Lemmas[Head[c]], c]]];
@@ -384,9 +384,9 @@ orelse[f1_, f2__] := f1;
 
 (* try each lemma sequentially *)
 
-Backchain[s_, and[a_,rest__], c_] :=
+Backchain[s_, And[a_,rest__], c_] :=
 	orelse[ Backchain[s, a, c],
-		Backchain[s, and[rest], c] ];
+		Backchain[s, And[rest], c] ];
 
 
 (* when "c" matches the conclusion part of a lemma, back chain *)
@@ -397,7 +397,7 @@ Backchain[s_, imp[b_, c1_], c_] :=   Block[{u1},
 
 	CurrentLemma = imp[b, c1];
 
-	BranchStackPush[{or[b, s], 0}];
+	BranchStackPush[{Or[b, s], 0}];
 
 	(* if the backchaining rule can be applied here *)
 

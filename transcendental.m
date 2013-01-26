@@ -41,13 +41,13 @@ inverse[delta[Cos]][a_] := a;
 
 Unprotect[Log];
 
-Log/: (Log[a_] == Log[b_]) :=  and[0 < a, a == b];
+Log/: (Log[a_] == Log[b_]) :=  And[0 < a, a == b];
 
-Log/: (Log[a_] < Log[b_])  :=  and[0 < a, a < b];
+Log/: (Log[a_] < Log[b_])  :=  And[0 < a, a < b];
 
-Log/: (Log[a_] <= Log[b_]) :=  and[0 < a, a <= b];
+Log/: (Log[a_] <= Log[b_]) :=  And[0 < a, a <= b];
 
-Log[a_ b_] := Log[a] + Log[b] /; WeakSimplify[and[a>0, b>0]];
+Log[a_ b_] := Log[a] + Log[b] /; WeakSimplify[And[a>0, b>0]];
 
 Log[a_ ^ b_] := b Log[a] /; WeakSimplify[a>0];
 

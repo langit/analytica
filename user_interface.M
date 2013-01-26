@@ -11,16 +11,16 @@ seq::usage =
 	and conclusion 'b'. ";
 
 or::usage = 
-	" or[a, b, ..., c] is the disjunction of a, b, ..., c. ";
+	" Or[a, b, ..., c] is the disjunction of a, b, ..., c. ";
 
 and::usage = 
-	" and[a, b, ..., c] is the conjunction of a, b, ..., c. ";
+	" And[a, b, ..., c] is the conjunction of a, b, ..., c. ";
 
 imp::usage = 
 	" imp[a, b] means \" a -> b \". ";
 
 not::usage = 
-	" not[a] is the negation of 'a'. ";
+	" Not[a] is the negation of 'a'. ";
 
 eqv::usage = 
 	" eqv[a, b] means 'a' and 'b' are equivalent. ";

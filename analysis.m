@@ -41,7 +41,7 @@ ContinuousFunction[Times] = True;
 
 Continuous[a_ ^ n_?integer, {x_, x0_}] :=
 	True /;
-	IsConstant[n, x] && Continuous[a, {x, x0}] && WeakSimplify[or[a!=0, n>=0]];
+	IsConstant[n, x] && Continuous[a, {x, x0}] && WeakSimplify[Or[a!=0, n>=0]];
 
 
 

@@ -19,9 +19,9 @@ integer[a_ ^ m_] := True /;
 
 (* odd integers *)
 
-Odd[x_ y_] := and[Odd[x], Odd[y]] /; integer[x] && integer[y];
+Odd[x_ y_] := And[Odd[x], Odd[y]] /; integer[x] && integer[y];
 
-Odd[x_ ^ y_] := and[Odd[x], integer[y], WeakSimplify[0 <= y]];
+Odd[x_ ^ y_] := And[Odd[x], integer[y], WeakSimplify[0 <= y]];
 
 Odd[x_Integer] := (Mod[x , 2] != 0);
 
@@ -29,9 +29,9 @@ Odd[x_Integer] := (Mod[x , 2] != 0);
 
 (* even integers *)
 
-Even[x_ y_] := or[Even[x], Even[y]] /; integer[x] && integer[y];
+Even[x_ y_] := Or[Even[x], Even[y]] /; integer[x] && integer[y];
 
-Even[x_ ^ y_] := and[Even[x], integer[y], WeakSimplify[0 < y]];
+Even[x_ ^ y_] := And[Even[x], integer[y], WeakSimplify[0 < y]];
 
 Even[x_Integer] := (Mod[x , 2] == 0);
 

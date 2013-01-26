@@ -212,7 +212,7 @@ RewriteTrig[s_] := Block[{s0, s1}, (
 
 	(* rewrite trigonometric expressions *)
 
-	s0 = EvaluateAssuming[not[s], TrigSimplify[s]];
+	s0 = EvaluateAssuming[Not[s], TrigSimplify[s]];
 
 	(* if changed during rewriting, simplify the sequent *)
 
