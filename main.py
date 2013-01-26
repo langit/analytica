@@ -90,8 +90,7 @@ def execute(file, definitions, script):
 
             total_input += line
 
-            if line == "":
-                pass
+            if not line: pass
             elif any(line.rstrip().endswith(op) for op in trailing_ops) or not brackets_balanced(total_input):
                 continue
 
