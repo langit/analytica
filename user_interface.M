@@ -4,7 +4,7 @@
 
 BeginPackage["UserInterface`"]
 
-(* these functions are provided in package simplify.M *)
+(* these functions are provided in package simplify.m *)
 
 seq::usage = 
 	" seq[a, b] is the notation for a sequent, with hypothesis 'a' \
@@ -157,7 +157,7 @@ UserRules::usage =
 
 CurrentPath::usage = 
 	" CurrentPath is a list of the sections that contain the current \
-	context section as a subsection. "
+	context section as a subsection. ";
 
 
 CurrentSection::usage = 
@@ -208,7 +208,7 @@ SuccessStepsOnly::usage =
 	steps are printed out. ";
 
 EndDocument::usage =
-	" EndDocument is used to put the ending to the TeX file. "
+	" EndDocument is used to put the ending to the TeX file. ";
 
 Abbreviate::usage = 
 	"Abbreviate[f1, f2] takes 'f2' as an abbreviation for 'f1'. ";
@@ -285,7 +285,7 @@ Lower::usage =
 	" Lower[f] gives a set of lower bounds for 'f'. ";
 
 
-(* these functions are provided in the package quantify.M *)
+(* these functions are provided in the package quantify.m *)
 
 all::usage = 
 	" all[x, f] is the universal quantifier, ('f' holds for all 'x'). \
