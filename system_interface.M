@@ -12,7 +12,7 @@ NIL::usage =
 
 SimplifyMessage::usage =
 	" SimplifyMessage is a list of rules and formulas which are \
-	results of intermediate steps of simplification. "
+	results of intermediate steps of simplification. ";
 
 SimplifyIfChanged::usage =
 	" SimplifyIfChanged[f1, f2] gives StrongSimplify[f2] as answer \
@@ -86,7 +86,7 @@ UserFunctions::usage =
 
 GivenFormulas::usage =
 	" GivenFormulas is a list of given properties which can be seen \
-	using PrintGiven. "
+	using PrintGiven. ";
 
 
 (* these functions are provided in package inequality.M *)
@@ -108,7 +108,7 @@ RulesForRelations::usage =
 	of some equations and inequalities. ";
 
 DepthCount::usage = 
-	" DepthCount is the current depth for using bound to prove 
+	" DepthCount is the current depth for using bound to prove \
 	inequalities. ";
 
 
@@ -168,7 +168,7 @@ Requantify::usage =
 	PositivePosition. ";
 
 PositivePosition::usage =
-	" PositivePosition means the positive position in a sequent. 
+	" PositivePosition means the positive position in a sequent. \
 	(See also quantify) ";
 
 NegativePosition::usage =
@@ -208,8 +208,8 @@ MaxMinRules::usage =
 	" MaxMinRules is a set of local rules about maximum or minimum \
 	values, it is used in simplification. ";
 
-GosperSum::usage = "GosperSum[term, {var, n0, n1}] attempts to find the value 
-	of Sum[term, {var, n0, n1}] for symbolic n0, n1."
+GosperSum::usage = "GosperSum[term, {var, n0, n1}] attempts to find \
+    the value of Sum[term, {var, n0, n1}] for symbolic n0, n1.";
 
 SimplifySummation::usage =
 	" SimplifySummation[i][f] tries ith method to simplify the summation \

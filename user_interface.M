@@ -157,7 +157,7 @@ UserRules::usage =
 
 CurrentPath::usage = 
 	" CurrentPath is a list of the sections that contain the current \
-	context section as a subsection. "
+	context section as a subsection. ";
 
 
 CurrentSection::usage = 
@@ -208,7 +208,7 @@ SuccessStepsOnly::usage =
 	steps are printed out. ";
 
 EndDocument::usage =
-	" EndDocument is used to put the ending to the TeX file. "
+	" EndDocument is used to put the ending to the TeX file. ";
 
 Abbreviate::usage = 
 	"Abbreviate[f1, f2] takes 'f2' as an abbreviation for 'f1'. ";
