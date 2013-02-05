@@ -102,7 +102,7 @@ def execute(file, definitions, script):
             total_input = ""
 
 # TODO all binary operators?
-trailing_ops = ['+', '-', '/', '*', '=', 
+trailing_ops = ['+', '-', '/', '*', '^', '=', 
 	'>', '<', '/;', '/:', '/.', '&&', '||'] 
 
 def main():

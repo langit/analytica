@@ -1,8 +1,9 @@
 (* Copyright E.M.Clarke and Xudong Zhao, Jan 22, 1991 *)
 
 (* ANALYTICA--A THEOREM PROVING SYSTEM FOR MATHEMATICA *)
-
-$Path = Join[$Path, {"/afs/user/xzhao/analytica/analytica", "/afs/user/xzhao/analytica/examples"}];
+Unprotect[$Path]
+$Path = Join[$Path, {"~/analytica", "~/analytica/examples"}];
+Protect[$Path]
 
 <<user_interface.M;
 
