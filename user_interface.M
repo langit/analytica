@@ -4,7 +4,7 @@
 
 BeginPackage["UserInterface`"]
 
-(* these functions are provided in package simplify.M *)
+(* these functions are provided in package simplify.m *)
 
 seq::usage = 
 	" seq[a, b] is the notation for a sequent, with hypothesis 'a' \
@@ -285,7 +285,7 @@ Lower::usage =
 	" Lower[f] gives a set of lower bounds for 'f'. ";
 
 
-(* these functions are provided in the package quantify.M *)
+(* these functions are provided in the package quantify.m *)
 
 all::usage = 
 	" all[x, f] is the universal quantifier, ('f' holds for all 'x'). \

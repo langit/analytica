@@ -5,7 +5,7 @@
 BeginPackage["SystemInterface`"]
 
 
-(* these functions are provided in package simplify.M *)
+(* these functions are provided in package simplify.m *)
 
 NIL::usage =
 	" NIL denotes True in a conjunction, False in a disjunction. ";
@@ -140,7 +140,7 @@ Factorize::usage =
 	where R is either ==, <= or <. ";
 
 
-(* these functions are provided in package quantify.M *)
+(* these functions are provided in package quantify.m *)
 
 
 substitution::usage = 

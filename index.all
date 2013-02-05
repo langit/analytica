@@ -14,11 +14,11 @@ $Path = Join[$Path, {"/afs/user/xzhao/analytica/analytica", "/afs/user/xzhao/ana
 
 (* Quantification. *)
 
-<<quantify.M;
+<<quantify.m;
 
 (* Simplify the sequent to be proved. *)
 
-<<simplify.M;
+<<simplify.m;
 
 (* Rewrite the sequent to be proved. *)
 
