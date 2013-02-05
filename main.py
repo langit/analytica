@@ -101,8 +101,9 @@ def execute(file, definitions, script):
                         print ' = %s' % to_output(unicode(result.result))           
             total_input = ""
 
+# TODO all binary operators?
 trailing_ops = ['+', '-', '/', '*', '=', 
-	'>', '<', '/;', '/:', '/.'] # TODO all binary operators?
+	'>', '<', '/;', '/:', '/.', '&&', '||'] 
 
 def main():
     argparser = argparse.ArgumentParser(

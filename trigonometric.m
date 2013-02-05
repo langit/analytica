@@ -13,29 +13,29 @@
 
 BeginPackage["Algebra`Trigonometry`", "UserInterface`"]
 
-TrigDefs::usage = "TrigDefs[expr] tries to expand instances of Tan,
+TrigDefs::usage = "TrigDefs[expr] tries to expand instances of Tan, \
         Cot, Csc, and Sec."
 
-TrigCanonical::usage = "TrigCanonical[expr] applies basic trigonometric
+TrigCanonical::usage = "TrigCanonical[expr] applies basic trigonometric \
 	simplifications to expr (e.g. Sin[-x] --> -Sin[x])."
 
-TrigFactor::usage = "TrigFactor[expr] tries to write sums of trigonometric
+TrigFactor::usage = "TrigFactor[expr] tries to write sums of trigonometric \
 	functions as products."
 
-TrigReduce::usage = "TrigReduce[expr] writes trigonometric functions of
-	multiple angles as sums of products of trigonometric functions of
+TrigReduce::usage = "TrigReduce[expr] writes trigonometric functions of \
+	multiple angles as sums of products of trigonometric functions of \
 	that angle."
 
-TrigReduce::notes = "TrigReduce simplifies the arguments of trigonometric
+TrigReduce::notes = "TrigReduce simplifies the arguments of trigonometric \
 	functions. It is in a way the inverse of TrigExpand"
 
-TrigToComplex::usage = "TrigToComplex[expr] writes trigonometric functions
+TrigToComplex::usage = "TrigToComplex[expr] writes trigonometric functions \
 	in terms of complex exponentials."
 
-ComplexToTrig::usage = "ComplexToTrig[expr] writes complex exponentials
+ComplexToTrig::usage = "ComplexToTrig[expr] writes complex exponentials \
 	as trigonometric functions of a real angle."
 
-TrigExpand::usage = "TrigExpand[expr] tries to write trigonometric
+TrigExpand::usage = "TrigExpand[expr] tries to write trigonometric \
 	functions of sums."
 
 (* note: TrigExpand[] is built in *)

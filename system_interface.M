@@ -108,7 +108,7 @@ RulesForRelations::usage =
 	of some equations and inequalities. ";
 
 DepthCount::usage = 
-	" DepthCount is the current depth for using bound to prove 
+	" DepthCount is the current depth for using bound to prove \
 	inequalities. ";
 
 
@@ -168,7 +168,7 @@ Requantify::usage =
 	PositivePosition. ";
 
 PositivePosition::usage =
-	" PositivePosition means the positive position in a sequent. 
+	" PositivePosition means the positive position in a sequent. \
 	(See also quantify) ";
 
 NegativePosition::usage =
@@ -208,7 +208,7 @@ MaxMinRules::usage =
 	" MaxMinRules is a set of local rules about maximum or minimum \
 	values, it is used in simplification. ";
 
-GosperSum::usage = "GosperSum[term, {var, n0, n1}] attempts to find the value 
+GosperSum::usage = "GosperSum[term, {var, n0, n1}] attempts to find the value \
 	of Sum[term, {var, n0, n1}] for symbolic n0, n1."
 
 SimplifySummation::usage =
