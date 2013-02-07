@@ -51,8 +51,8 @@ EndSection[] :=  (
 	   useful *)
 
 	clear[GivenUpperAt[CurrentSection], GivenLowerAt[CurrentSection]];
-	GivenUpperAt[CurrentSection] = .;
-	GivenLowerAt[CurrentSection] = .;
+	GivenUpperAt[CurrentSection] =.;
+	GivenLowerAt[CurrentSection] =.;
 
 	(* clear the set of given properties *)
 	

@@ -232,11 +232,11 @@ PrintMessage[{{s_, f_}, rest___}] :=
 
 (* Print out the result. *)
 
-PrintResult[rule_, result_] :=
+PrintResult[rule_, result_] := (
 
 	 (* Print the inference rule used. *)
 
- 	(print[rule];
+ 	 print[rule];
 
 	 (* Print the result. *)
 
